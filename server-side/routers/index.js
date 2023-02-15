@@ -4,6 +4,7 @@ const errorHandler = require("../middlewares/errorHandler")
 const router = require("express").Router()
 
 router.get("/patients", Controller.listPatients)
+router.get("/babies", Controller.listBabies)
 router.post("/patients", Controller.addPatient)
 router.put("/patients", Controller.updatePatientById)
 router.delete("/patients", Controller.deletePatientById)
