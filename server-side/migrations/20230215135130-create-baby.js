@@ -20,15 +20,27 @@ module.exports = {
       },
       genderBaby: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       babyLength: {
         type: Sequelize.FLOAT,
+        allowNull: false
       },
       babyWeight: {
         type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      partusProcess: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       birthStatus: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

@@ -52,31 +52,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Gestational age is required",
         },
       },
-    },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Born date is required",
-        },
-        notNull: {
-          msg: "Born date is required",
-        },
-      },
-    },
-    partusProcess: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Partus process is required",
-        },
-        notNull: {
-          msg: "Partus Process is required",
-        },
-      },
-    },
+    }
   }, {
     sequelize,
     modelName: 'Patient',

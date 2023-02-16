@@ -4,10 +4,10 @@ class Controller {
     static async listPatients (req, res, next) {
         try {
             let patients = await Patient.findAll({
-                attributes: ["id", "motherName", "motherAge", "gestationalAge", "date", "partusProcess"],
+                attributes: ["id", "motherName", "motherAge", "gestationalAge"],
                 include: {
                     model: Baby,
-                    attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "birthStatus"]
+                    attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"]
                 }
             })
             res.status(200).json(patients)
@@ -19,10 +19,10 @@ class Controller {
     static async listBabies (req, res, next) {
         try {
             let babies = await Baby.findAll({
-                attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "birthStatus"],
+                attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"],
                 include: {
                     model: Patient,
-                    attributes: ["motherName", "motherAge", "gestationalAge", "date", "partusProcess"]
+                    attributes: ["motherName", "motherAge", "gestationalAge"]
                 }
             })
             res.status(200).json(babies)
@@ -34,35 +34,46 @@ class Controller {
     static async addPatient (req, res, next) {
         const t = await sequelize.transaction()
         try {
-          let { motherName, motherAge, gestationalAge, date, partusProcess, genderBaby1, babyLength1, babyWeight1, birthStatus1, genderBaby2, babyLength2, babyWeight2, birthStatus2} = req.body
+          let { motherName, motherAge, gestationalAge } = req.body
           let patient = await Patient.create(
             {
-            motherName, motherAge, gestationalAge, date, partusProcess
+            motherName, motherAge, gestationalAge
             },
             { transaction: t}
           )
-          let baby = await Baby.bulkCreate(
-            [
-                {
-                    PatientId: patient.id,
-                    genderBaby: genderBaby1,
-                    babyLength: babyLength1,
-                    babyWeight: babyWeight1,
-                    birthStatus: birthStatus1
-                },
-                {
-                    PatientId: patient.id,
-                    genderBaby: genderBaby2,
-                    babyLength: babyLength2,
-                    babyWeight: babyWeight2,
-                    birthStatus: birthStatus2
-                }
-            ],
-            { transaction: t}
-          )
          await t.commit()
-         res.status(201).json({patient, baby})
+         res.status(201).json({message: `Data patient ${motherName} has been added`})
         } catch (err) {
+            next(err)
+            await t.rollback()
+        }
+    }
+
+    static async addBaby (req, res, next) {
+        const t = await sequelize.transaction()
+        try {
+            let { id } = req.params
+            if (!id) {
+                throw { name: "NOT_FOUND"}
+            }
+            let patient = await Patient.findByPk(id)
+            let { genderBaby, babyLength, babyWeight, date, partusProcess, birthStatus } = req.body
+            let baby = await Baby.create(
+            {
+                PatientId: patient.id,
+                genderBaby,
+                babyLength,
+                babyWeight,
+                date,
+                partusProcess,
+                birthStatus
+            },
+            { transaction: t}
+            )
+            await t.commit()
+            res.status(201).json({ message: `Data baby from ${patient.motherName} has been added`})
+        } catch (err) {
+            console.log(err)
             next(err)
             await t.rollback()
         }
@@ -71,10 +82,10 @@ class Controller {
     static async updatePatientById (req, res, next) {
         try {  
         let { id } = req.params;
-        let { motherName, motherAge, gestationalAge, date, partusProcess} = req.body
+        let { motherName, motherAge, gestationalAge } = req.body
         let patient = await Patient.update(
             {
-            motherName, motherAge, gestationalAge, date, partusProcess
+            motherName, motherAge, gestationalAge
             },
             {
             where: {
@@ -88,7 +99,6 @@ class Controller {
         } catch (err) {
             next(err)
         }
-
     }
 
     static async deletePatientById (req, res, next) {

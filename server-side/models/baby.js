@@ -29,10 +29,78 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    genderBaby: DataTypes.STRING,
-    babyLength: DataTypes.FLOAT,
-    babyWeight: DataTypes.FLOAT,
-    birthStatus: DataTypes.STRING
+    genderBaby: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Gender baby is required",
+        },
+        notNull: {
+          msg: "Gender baby is required",
+        },
+      },
+    },
+    babyLength: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Baby length is required",
+        },
+        notNull: {
+          msg: "Baby length is required",
+        },
+      },
+    },
+    babyWeight: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Baby weight is required",
+        },
+        notNull: {
+          msg: "Baby weight is required",
+        },
+      },
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Born date is required",
+        },
+        notNull: {
+          msg: "Born date is required",
+        },
+      },
+    },
+    partusProcess: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Partus process is required",
+        },
+        notNull: {
+          msg: "Partus Process is required",
+        },
+      },
+    },
+    birthStatus: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Birth status is required",
+        },
+        notNull: {
+          msg: "Birth status is required",
+        },
+      },
+    },
   }, {
     sequelize,
     modelName: 'Baby',

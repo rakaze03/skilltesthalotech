@@ -21,14 +21,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      partusProcess: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

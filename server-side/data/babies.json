@@ -1,0 +1,12 @@
+[
+    {"PatientId": 1, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.7, "date": "2022-06-07 15:00:35.613 +0700", "partusProcess": "normal", "birthStatus": "Healthy"},
+    {"PatientId": 2, "genderBaby": "Female", "babyLength": 52, "babyWeight": 2.8, "date": "2022-12-09 13:00:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
+    {"PatientId": 3, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.6, "date": "2022-09-06 23:45:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
+    {"PatientId": 3, "genderBaby": "Female", "babyLength": 53, "babyWeight": 2.9, "date": "2022-09-07 00:05:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
+    {"PatientId": 4, "genderBaby": "Female", "babyLength": 48, "babyWeight": 2.4, "date": "2022-10-03 09:05:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Disable"},
+    {"PatientId": 5, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.7, "date": "2022-10-03 17:05:35.613 +0700", "partusProcess": "Waterbirth", "birthStatus": "Healthy"},
+    {"PatientId": 6, "genderBaby": "Female", "babyLength": 50, "babyWeight": 2.8, "date": "2022-11-07 12:05:35.613 +0700", "partusProcess": "Normal", "birthStatus": "Death"},
+    {"PatientId": 7, "genderBaby": "Male", "babyLength": 52, "babyWeight": 3.0, "date": "2022-11-02 20:05:35.613 +0700", "partusProcess": "Normal", "birthStatus": "Healthy"},
+    {"PatientId": 8, "genderBaby": "Female", "babyLength": 55, "babyWeight": 2.8, "date": "2022-11-03 15:05:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
+    {"PatientId": 9, "genderBaby": "Male", "babyLength": 52, "babyWeight": 2.6, "date": "2022-11-01 22:05:35.613 +0700", "partusProcess": "Waterbirth", "birthStatus": "Healthy"}
+]

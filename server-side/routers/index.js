@@ -6,8 +6,9 @@ const router = require("express").Router()
 router.get("/patients", Controller.listPatients)
 router.get("/babies", Controller.listBabies)
 router.post("/patients", Controller.addPatient)
-router.put("/patients", Controller.updatePatientById)
-router.delete("/patients", Controller.deletePatientById)
+router.post("/babies/:id", Controller.addBaby)
+router.put("/patients/:id", Controller.updatePatientById)
+router.delete("/patients/:id", Controller.deletePatientById)
 
 router.use(errorHandler)
 
