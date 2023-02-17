@@ -19,8 +19,10 @@ module.exports = {
         onDelete: "cascade",
       },
       genderBaby: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.ENUM,
+        values: ["Male", "Female"],
+        allowNull: false,
+        defaultValue: "Male"
       },
       babyLength: {
         type: Sequelize.FLOAT,
@@ -35,12 +37,16 @@ module.exports = {
         allowNull: false
       },
       partusProcess: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.ENUM,
+        values: ["Normal", "Caesar", "Waterbirth"],
+        allowNull: false,
+        defaultValue: "Normal"
       },
       birthStatus: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.ENUM,
+        values: ["Healthy", "Disable", "Death"],
+        allowNull: false,
+        defaultValue: "Healthy"
       },
       createdAt: {
         allowNull: false,

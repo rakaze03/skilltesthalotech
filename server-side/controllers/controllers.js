@@ -1,4 +1,6 @@
 const { Patient, Baby, sequelize } = require("../models/index")
+const { Op } = require("sequelize")
+const dayjs = require("dayjs")
 
 class Controller {
     static async listPatients (req, res, next) {
@@ -18,13 +20,25 @@ class Controller {
 
     static async listBabies (req, res, next) {
         try {
-            let babies = await Baby.findAll({
+            let query = { 
                 attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"],
                 include: {
-                    model: Patient,
-                    attributes: ["motherName", "motherAge", "gestationalAge"]
+                        model: Patient,
+                        attributes: ["motherName", "motherAge", "gestationalAge"]
+                    },
+                where: {}
+            }
+            let { date1, date2} = req.query
+            let periode1 = dayjs(date1)
+            let periode2 = dayjs(date2)
+
+            if (date1 && date2) {
+                query.where.date = {
+                    [Op.between]: [periode1, periode2]
                 }
-            })
+            }
+
+            let babies = await Baby.findAll(query)
             res.status(200).json(babies)
         } catch (err) {
             next(err)
@@ -58,6 +72,9 @@ class Controller {
             }
             let patient = await Patient.findByPk(id)
             let { genderBaby, babyLength, babyWeight, date, partusProcess, birthStatus } = req.body
+            if (typeof(babyLength) !== "number" || typeof(babyWeight) !== "number") {
+                throw {name: "WRONG_INPUT_TYPE"}
+            }
             let baby = await Baby.create(
             {
                 PatientId: patient.id,

@@ -30,8 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     genderBaby: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
       allowNull: false,
+      values: ["Male", "Female"],
+      defaultValue: "Male",
       validate: {
         notEmpty: {
           msg: "Gender baby is required",
@@ -51,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Baby length is required",
         },
+        min: {
+          args: 1,
+          msg: "Baby length minimum is 20cm"
+        }
       },
     },
     babyWeight: {
@@ -63,6 +69,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "Baby weight is required",
         },
+        min: {
+          args: 1,
+          msg: "Baby weight minimum is 1 kg"
+        }
       },
     },
     date: {
@@ -78,8 +88,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     partusProcess: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
       allowNull: false,
+      values: ["Normal", "Caesar", "Waterbirth"],
+      defaultValue: "Normal",
       validate: {
         notEmpty: {
           msg: "Partus process is required",
@@ -90,8 +102,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     birthStatus: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
       allowNull: false,
+      values: ["Healthy", "Disable", "Death"],
+      defaultValue: "Healthy",
       validate: {
         notEmpty: {
           msg: "Birth status is required",
