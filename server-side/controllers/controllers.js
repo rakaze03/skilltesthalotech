@@ -18,10 +18,29 @@ class Controller {
         }
     }
 
+    static async listPatientsById (req, res, next) {
+        try {
+            let { id } = req.params
+            let patient = await Patient.findByPk(id, {
+                attributes: ["id", "motherName", "motherAge", "gestationalAge"],
+                include: {
+                    model: Baby,
+                    attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"]
+                }
+            })
+            if (!patient) {
+                throw { name: "NOT_FOUND"}
+            }
+            res.status(200).json(patient)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     static async listBabies (req, res, next) {
         try {
             let query = { 
-                attributes: ["PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"],
+                attributes: ["id", "PatientId", "genderBaby", "babyLength", "babyWeight", "date", "partusProcess", "birthStatus"],
                 include: {
                         model: Patient,
                         attributes: ["motherName", "motherAge", "gestationalAge"]
@@ -66,29 +85,21 @@ class Controller {
     static async addBaby (req, res, next) {
         const t = await sequelize.transaction()
         try {
-            let { id } = req.params
-            if (!id) {
-                throw { name: "NOT_FOUND"}
-            }
-            let patient = await Patient.findByPk(id)
-            let { genderBaby, babyLength, babyWeight, date, partusProcess, birthStatus } = req.body
-            if (typeof(babyLength) !== "number" || typeof(babyWeight) !== "number") {
-                throw {name: "WRONG_INPUT_TYPE"}
-            }
+            let { PatientId, genderBaby, babyLength, babyWeight, partusProcess, birthStatus } = req.body
             let baby = await Baby.create(
             {
-                PatientId: patient.id,
+                PatientId,
                 genderBaby,
                 babyLength,
                 babyWeight,
-                date,
+                date: new Date(),
                 partusProcess,
                 birthStatus
             },
             { transaction: t}
             )
             await t.commit()
-            res.status(201).json({ message: `Data baby from ${patient.motherName} has been added`})
+            res.status(201).json({ message: `Data baby has been added successfully`})
         } catch (err) {
             console.log(err)
             next(err)

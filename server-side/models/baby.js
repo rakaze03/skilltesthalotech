@@ -56,6 +56,9 @@ module.exports = (sequelize, DataTypes) => {
         min: {
           args: 1,
           msg: "Baby length minimum is 20cm"
+        },
+        isNumeric: {
+          msg: "Wrong input type in baby length"
         }
       },
     },
@@ -72,6 +75,9 @@ module.exports = (sequelize, DataTypes) => {
         min: {
           args: 1,
           msg: "Baby weight minimum is 1 kg"
+        },
+        isNumeric: {
+          msg: "Wrong input type in baby weight"
         }
       },
     },

@@ -1,5 +1,5 @@
 [
-    {"PatientId": 1, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.7, "date": "2022-06-07 15:00:35.613 +0700", "partusProcess": "normal", "birthStatus": "Healthy"},
+    {"PatientId": 1, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.7, "date": "2022-06-07 15:00:35.613 +0700", "partusProcess": "Normal", "birthStatus": "Healthy"},
     {"PatientId": 2, "genderBaby": "Female", "babyLength": 52, "babyWeight": 2.8, "date": "2022-12-09 13:00:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
     {"PatientId": 3, "genderBaby": "Male", "babyLength": 51, "babyWeight": 2.6, "date": "2022-09-06 23:45:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
     {"PatientId": 3, "genderBaby": "Female", "babyLength": 53, "babyWeight": 2.9, "date": "2022-09-07 00:05:35.613 +0700", "partusProcess": "Caesar", "birthStatus": "Healthy"},
